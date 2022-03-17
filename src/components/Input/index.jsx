@@ -13,7 +13,7 @@ class Input extends React.Component{
     }
 
     handleChange(e){
-        console.log(e.target.value)
+        // console.log(e.target.value)
         // this.state.value = e.target.value;
         // this.setState({
         //     value: e.target.value,
@@ -25,7 +25,8 @@ class Input extends React.Component{
     render(){
         return(
             <div>
-                <input onChange={this.handleChange} />
+                {/* <input onChange={this.handleChange} /> */}
+                <input ref={this.props.inputRef} onKeyPress={this.props.onkeypress} />
                 {/* <p>{this.state.value}</p> */}
                 {/* <p>{this.state.value1}</p> */}
             </div>

@@ -8,12 +8,18 @@ class App extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            value: "",
+            // value: "",
             todos:[]
         };
         this.updatetodos = this.updatetodos.bind(this);
         this.updateList = this.updateList.bind(this);
         this.deleteTodos = this.deleteTodos.bind(this);
+        // this.input  = React.createRef();
+        this.handleKeyPress = this.handleKeyPress.bind(this)
+    }
+
+    componentDidMount(){
+        this.input.focus();
     }
 
     updatetodos(newTodos){
@@ -21,22 +27,34 @@ class App extends React.Component{
     }
 
     updateList(){
+        // console.log(this.input.current.value)
         var copyTodos = [...this.state.todos];
         // ... means copy. Here copying todos inside array
-        copyTodos.push(this.state.value)
+        // copyTodos.push(this.input.current.value)
+        copyTodos.push(this.input.value)
         this.setState({
-            value:"",
+            // value:"",
             todos: copyTodos
         })
+        // console.log(this.state.value)
+        // console.log(this.state.todos)
+        this.input.value = "";
     }
 
     deleteTodos(index){
         var copyTodos = [...this.state.todos]
         copyTodos.splice(index,1)
         this.updatetodos({
-            value:'',
+            // value:'',
             todos:copyTodos
         });
+    }
+
+    handleKeyPress(e){
+        if (e.key === 'Enter'){
+            // console.log('enter was pressed')
+            this.updateList()
+        }
     }
 
     render(){
@@ -52,8 +70,10 @@ class App extends React.Component{
                 {/* <h1 className="bold">Todo Application {this.props.attr}</h1> */}
                 {/* curly brackets for inserting inline javascript */}
                 <div style={{display:"flex"}}>
-                    <Input todos={this.state.value} updatetodos={this.updatetodos} />
-                    <button onClick={this.updateList} >Click me!</button>
+                    {/* <Input updatetodos={this.updatetodos} /> */}
+                    {/* <input ref={this.input} onKeyPress={this.handleKeyPress} /> */}
+                    <Input inputRef={(el) => (this.input = el)} onkeypress={this.handleKeyPress} />
+                    <button onClick={this.updateList} >Enter</button>
                 </div>
                 <List todos={this.state.todos} updatetodos={this.updatetodos} deletetodos={this.deleteTodos} />
             </div>

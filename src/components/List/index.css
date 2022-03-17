@@ -1,0 +1,12 @@
+.flex-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.flex-list button{
+    width: 35px;
+    height: 35px;
+    margin: 2px;
+}
